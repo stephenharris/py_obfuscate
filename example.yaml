@@ -1,0 +1,50 @@
+tables:
+   payments: 
+    truncate: true
+   user:
+    login: 
+      type: "string"
+      chars: "0123456789"
+      length: 10
+    password: 
+      type: "fixed"
+      value: "user_pass"
+      unless:
+        login: "admin"
+    title: 
+      type: "fixed"
+      value: ["Mr", "Mrs", "Miss", "Dr"]
+    fname: 
+      type: "first_name"
+    lname: 
+      type: "last_name"
+    name: 
+      type: "name"
+    email: 
+      type: "email"
+    street_address: 
+      type: "street_address"
+    secondary_address: 
+      type: "secondary_address"
+    city: 
+      type: "city"
+    postcode: 
+      type: "postcode"
+    country: 
+      type: "country"
+    landline: 
+      type: "uk_landline"
+    mobile: 
+      type: "mobile"
+    company: 
+      type: "company"
+    ip: 
+      type: "ipv4"
+    company: 
+      type: "company"
+    url: 
+      type: "url"
+    integer: 
+      type: "integer"
+      min: 0
+      max: 99
