@@ -39,7 +39,7 @@ tables:
     company: 
       type: "company"
     ip: 
-      type: "ipv4"
+      type: "ip"
     company: 
       type: "company"
     url: 
