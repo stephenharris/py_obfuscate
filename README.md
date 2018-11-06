@@ -6,10 +6,10 @@ This project is a partial-port of <a href="https://github.com/mavenlink/my_obfus
 
 ## Example usage
 This package exposes a `py_obfuscate` module which contains `Obfuscator` class with a very simple inteface.
-It expects two streams: a read string (e.g. the mysqldump file) and write stream (e.g. the file to write the obfuscated dump to).
+It's `obfuscate` method expects two streams: a read string (e.g. the mysqldump file) and write stream (e.g. the file to write the obfuscated dump to).
 
 ```
-obfuscate.obfuscate(streamIn, streamOut)
+obfuscatator.obfuscate(streamIn, streamOut)
 ```
 
 As a more practical example, create the file `obfuscate.py`
@@ -20,12 +20,12 @@ import yaml
 import py_obfuscate
 
 config = yaml.safe_load(open("obfuscator.yaml"))
-obfuscate = py_obfuscate.Obfuscator(config)
+obfuscatator = py_obfuscate.Obfuscator(config)
 
 src = sys.stdin
 out = sys.stdout
 
-obfuscate.obfuscate(src, out)
+obfuscatator.obfuscate(src, out)
 ```
 
 Now create a config file (`obfuscate.yaml`), e.g.:
@@ -55,7 +55,7 @@ mysqldump -c --add-drop-table --hex-blob -u user -ppassword database | python ob
 
 ## Configuration
 
-In the above example we've used YAML as the configuration format; since you pass `py_obfuscate.Obfuscator` an config object (dictionary) you can
+In the above example we've used YAML as the configuration format; since you pass `py_obfuscate.Obfuscator` a config object (dictionary) you can
 use any format you wish, so long as parses into the same structure. The basic structure is:
 
 ```
@@ -86,18 +86,18 @@ These are the following types supported:
 
 #### string 
 
-**Options:**
+Options:
 * `chars` (string) The character list to choose from (defaults `"1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_+-=[{]}/?|!@#$%^&*()``~"`)
 * `length` (integer) The length of the string (defaults `10`)
 
 #### fixed 
 
-**Options:**
+Options:
 * `value` (string|array) Replace column entries with this value or one of the values in the specified array (defaults `""`)
 
 #### integer 
 
-**Options:**
+Options:
 * `min` (string) Replace column entries with a random integer greater than or equal to this value (defaults `0`)
 * `max` (string) Replace column entries with a random integer less than or equal to this value (defaults `100`)
 

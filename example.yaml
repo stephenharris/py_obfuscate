@@ -1,3 +1,4 @@
+locale: "en_GB"
 tables:
    payments: 
     truncate: true
